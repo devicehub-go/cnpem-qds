@@ -37,8 +37,10 @@ type Middleware struct {
 
 	queue *queue.Queue
 
-	FrameChan    chan FrameEvent
-	SnapshotChan chan FrameEvent
+	FrameChan       chan FrameEvent
+	SnapshotChan    chan FrameEvent
+	CurrentFrame    FrameEvent
+	CurrentSnapshot FrameEvent
 }
 
 // Creates a new middleware instance, that provides methods

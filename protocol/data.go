@@ -56,6 +56,7 @@ func (m *Middleware) onProcessing(payload []byte) {
 			}
 		}
 		m.FrameChan <- out
+		m.CurrentFrame = out
 	}(frame, result)
 
 	if m.buffer.Feed(frame, result) {
@@ -77,5 +78,6 @@ func (m *Middleware) onProcessing(payload []byte) {
 			}
 		}
 		m.SnapshotChan <- out
+		m.CurrentSnapshot = out
 	}
 }
