@@ -17,9 +17,9 @@ type FrameEvent struct {
 }
 
 type ChannelData struct {
-	Voltage   []float64
-	IsQuench  bool
-	QuenchIdx int
+	Voltage   []float64 `json:"voltage"`
+	IsQuench  bool      `json:"is_quench"`
+	QuenchIdx int       `json:"quench_idx"`
 }
 
 // Handles quench data messages
