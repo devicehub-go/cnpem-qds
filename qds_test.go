@@ -8,18 +8,17 @@ import (
 	"time"
 
 	swlsqds "github.com/devicehub-go/cnpem-qds"
-	"github.com/devicehub-go/cnpem-qds/protocol"
 	"github.com/devicehub-go/cnpem-qds/protocol/config"
 )
 
 func TestMain(t *testing.T) {
-	options := protocol.Options{
+	options := swlsqds.Options{
 		Host:        "dat-aro.cnpem.br",
 		Port:        1883,
 		Timeout:     1 * time.Second,
 		TopicPrefix: "weg/qds/r",
 	}
-	config := config.QDSConfig{
+	config := swlsqds.Config{
 		Common: config.CommonConfig{
 			ADCResolution: 152,
 			DataSizeMs:    200,

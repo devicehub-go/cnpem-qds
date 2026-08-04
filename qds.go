@@ -5,6 +5,9 @@ import (
 	"github.com/devicehub-go/cnpem-qds/protocol/config"
 )
 
+type Options = protocol.Options
+type Config = config.QDSConfig
+
 // Creates a new middleware instance, that provides methods
 // to interface communication with QDS through MQTT
 func New(options protocol.Options, config config.QDSConfig) *protocol.Middleware {
