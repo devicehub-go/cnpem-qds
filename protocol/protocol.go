@@ -19,11 +19,12 @@ import (
 )
 
 type Options struct {
-	Host          string
-	Port          int
-	Timeout       time.Duration
-	TopicPrefix   string
-	Configuration config.QDSConfig
+	Host            string
+	Port            int
+	Timeout         time.Duration
+	WatchdogTimeout time.Duration
+	TopicPrefix     string
+	Configuration   config.QDSConfig
 }
 
 type Middleware struct {
@@ -47,6 +48,9 @@ func New(options Options, config config.QDSConfig) *Middleware {
 	url := fmt.Sprintf("tcp://%s:%d", options.Host, options.Port)
 	if options.Timeout == 0 {
 		options.Timeout = 100 * time.Millisecond
+	}
+	if options.WatchdogTimeout == 0 {
+		options.Timeout = 1000 * time.Millisecond
 	}
 
 	clientOptions := paho.NewClientOptions()
@@ -99,7 +103,7 @@ func (m *Middleware) Close() error {
 
 // Starts to process data queue messages
 func (m *Middleware) Run(ctx context.Context) error {
-	watchdog := watchdog.New(ctx, 10*time.Second)
+	watchdog := watchdog.New(ctx, m.options.WatchdogTimeout)
 	watchdog.Start()
 
 	for {
