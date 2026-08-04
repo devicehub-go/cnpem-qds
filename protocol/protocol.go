@@ -37,8 +37,6 @@ type Middleware struct {
 
 	queue *queue.Queue
 
-	FrameChan       chan FrameEvent
-	SnapshotChan    chan FrameEvent
 	CurrentFrame    FrameEvent
 	CurrentSnapshot FrameEvent
 }
@@ -59,13 +57,11 @@ func New(options Options, config config.QDSConfig) *Middleware {
 	clientOptions.SetClientID(clientId)
 
 	return &Middleware{
-		options:      options,
-		client:       paho.NewClient(clientOptions),
-		buffer:       buffer.New(config),
-		decoder:      decoder.New(config),
-		queue:        queue.New(),
-		FrameChan:    make(chan FrameEvent),
-		SnapshotChan: make(chan FrameEvent),
+		options: options,
+		client:  paho.NewClient(clientOptions),
+		buffer:  buffer.New(config),
+		decoder: decoder.New(config),
+		queue:   queue.New(),
 	}
 }
 

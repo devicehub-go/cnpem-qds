@@ -55,7 +55,6 @@ func (m *Middleware) onProcessing(payload []byte) {
 				QuenchIdx: result.Channels[ch].QuenchIdx,
 			}
 		}
-		m.FrameChan <- out
 		m.CurrentFrame = out
 	}(frame, result)
 
@@ -77,7 +76,6 @@ func (m *Middleware) onProcessing(payload []byte) {
 				QuenchIdx: s.QuenchIdx,
 			}
 		}
-		m.SnapshotChan <- out
 		m.CurrentSnapshot = out
 	}
 }

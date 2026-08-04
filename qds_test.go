@@ -69,6 +69,7 @@ func TestMain(t *testing.T) {
 	ctx := context.Background()
 	go qds.Run(ctx)
 
-	fmt.Println(<-qds.FrameChan)
+	fmt.Println(qds.CurrentFrame)
+
 	fmt.Println("Finished")
 }
