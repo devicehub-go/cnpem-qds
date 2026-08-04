@@ -1,0 +1,42 @@
+{
+    "0": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "1": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "2": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "3": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "4": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "5": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "6": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "7": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "8": {
+        "debounce_time": 10,
+        "threshold": 250
+    },
+    "9": {
+        "debounce_time": 10,
+        "threshold": 250
+    }
+}
