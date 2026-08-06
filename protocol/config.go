@@ -35,5 +35,5 @@ func (m *Middleware) GetOffset(channel int) (float64, error) {
 	if !ok {
 		return 0.0, fmt.Errorf("invalid channel, got: %d", channel)
 	}
-	return config.Gain, nil
+	return config.Offset, nil
 }
