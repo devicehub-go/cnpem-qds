@@ -1,7 +1,6 @@
 package protocol
 
 import (
-	"fmt"
 	"log"
 	"time"
 
@@ -24,11 +23,9 @@ type ChannelData struct {
 
 // Handles quench data messages
 func (m *Middleware) onQDSData(client paho.Client, message paho.Message) {
-	fmt.Println(message.Topic())
 	m.queue.Enqueue(message.Payload())
 }
 
-// onProcessing is the core pipeline: decode → detect → buffer → publish
 func (m *Middleware) onProcessing(payload []byte) {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
@@ -56,6 +53,7 @@ func (m *Middleware) onProcessing(payload []byte) {
 			}
 		}
 		m.CurrentFrame = out
+		log.Println("frame updated")
 	}(frame, result)
 
 	if m.buffer.Feed(frame, result) {

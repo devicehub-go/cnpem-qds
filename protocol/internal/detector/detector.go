@@ -63,6 +63,7 @@ func (r *Result) HasQuench() bool {
 func Detect(frame decoder.Frame, cfg config.QDSConfig) Result {
 	result := Result{
 		FirstQuenchIdx: -1,
+		Channels:       make(map[int]QuenchResult),
 	}
 
 	for _, pair := range cfg.ImbalanceChannels {
