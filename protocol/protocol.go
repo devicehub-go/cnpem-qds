@@ -63,6 +63,7 @@ func New(options Options, config config.QDSConfig) *Middleware {
 	return &Middleware{
 		options: options,
 		client:  paho.NewClient(clientOptions),
+		config:  config,
 		buffer:  buffer.New(config),
 		decoder: decoder.New(config),
 		queue:   queue.New(),

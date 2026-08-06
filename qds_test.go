@@ -69,7 +69,7 @@ func TestMain(t *testing.T) {
 	ctx := context.Background()
 	go qds.Run(ctx)
 
-	fmt.Println(qds.CurrentFrame)
+	fmt.Println(qds.GetGain(0))
 
 	fmt.Println("Finished")
 }
