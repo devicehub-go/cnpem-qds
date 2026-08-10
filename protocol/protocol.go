@@ -118,7 +118,6 @@ func (m *Middleware) Run(ctx context.Context) error {
 		case <-m.queue.Notify:
 			watchdog.Kick()
 			for {
-				fmt.Println(time.Now())
 				payload, ok := m.queue.Dequeue()
 				if !ok {
 					break

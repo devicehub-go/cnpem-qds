@@ -53,7 +53,6 @@ func (m *Middleware) onProcessing(payload []byte) {
 			}
 		}
 		m.CurrentFrame = out
-		log.Println("frame updated")
 	}(frame, result)
 
 	if m.buffer.Feed(frame, result) {
