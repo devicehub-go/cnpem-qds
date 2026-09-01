@@ -4,11 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/devicehub-go/cnpem-qds/protocol/config"
+)
+
+const (
+	DECIMALS int = 5
 )
 
 type ChannelFrame struct {
@@ -38,7 +43,9 @@ func calibrate(raw []float64, adcResolution, gain, offset float64) []float64 {
 	calibrated := make([]float64, len(raw))
 	adcRes := adcResolution * 1e-6
 	for i, v := range raw {
-		calibrated[i] = (v*adcRes)*gain + offset
+		value := (v*adcRes)*gain + offset
+		roundFactor := math.Pow(10, float64(DECIMALS))
+		calibrated[i] = math.Round(value*roundFactor) / roundFactor
 	}
 	return calibrated
 }
