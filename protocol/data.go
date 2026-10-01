@@ -58,6 +58,7 @@ func (m *Middleware) onProcessing(payload []byte) {
 	if m.buffer.Feed(frame, result) {
 		snap, err := m.buffer.Dispatch()
 		if err != nil {
+			log.Printf("error on dispatch quench buffer: %+v", err)
 			return
 		}
 		out := FrameEvent{

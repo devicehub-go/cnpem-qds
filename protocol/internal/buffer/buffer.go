@@ -1,7 +1,7 @@
 package buffer
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/devicehub-go/cnpem-qds/protocol/internal/decoder"
 	"github.com/devicehub-go/cnpem-qds/protocol/internal/detector"
@@ -101,7 +101,7 @@ func (b *Buffer) Dispatch() ([]ChannelSnapshot, error) {
 		}
 
 		if end > len(b.samples[ch]) {
-			return snapshot, fmt.Errorf("missing data in snapshot")
+			log.Printf("missing data in snapshot for channel: %d", ch)
 		}
 
 		slice := b.samples[ch][start:end]
