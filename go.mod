@@ -2,7 +2,10 @@ module github.com/devicehub-go/cnpem-qds
 
 go 1.25.4
 
-require github.com/eclipse/paho.mqtt.golang v1.5.1
+require (
+	github.com/eclipse/paho.mqtt.golang v1.5.1
+	github.com/google/uuid v1.6.0
+)
 
 require (
 	github.com/gorilla/websocket v1.5.3 // indirect

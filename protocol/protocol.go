@@ -14,6 +14,7 @@ import (
 	"github.com/devicehub-go/cnpem-qds/protocol/internal/decoder"
 	"github.com/devicehub-go/cnpem-qds/protocol/internal/queue"
 	"github.com/devicehub-go/cnpem-qds/protocol/internal/watchdog"
+	"github.com/google/uuid"
 
 	paho "github.com/eclipse/paho.mqtt.golang"
 )
@@ -57,7 +58,7 @@ func New(options Options, config config.QDSConfig) *Middleware {
 	clientOptions.AddBroker(url)
 
 	prefix := strings.ReplaceAll(options.TopicPrefix, "/", "_")
-	clientId := fmt.Sprintf("qds_processing_go_%s", prefix)
+	clientId := fmt.Sprintf("qds_processing_go_%s_%s", prefix, uuid.NewString())
 	clientOptions.SetClientID(clientId)
 
 	return &Middleware{
