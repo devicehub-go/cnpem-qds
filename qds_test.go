@@ -19,57 +19,37 @@ func TestMain(t *testing.T) {
 		TopicPrefix:     "weg/qds/r",
 		WatchdogTimeout: 10 * time.Hour,
 	}
+
+	numChannels := 8
+
+	channels := make(map[int]config.ChannelConfig, numChannels)
+	comparison := make(map[int]config.ComparisonConfig, numChannels)
+	overvoltage := make([]config.OvervoltageChannel, numChannels)
+
+	for i := range numChannels {
+		channels[i] = config.ChannelConfig{
+			Gain:   1.0,
+			Offset: 0.0,
+			Window: 200,
+		}
+		overvoltage[i] = config.OvervoltageChannel{
+			Channel:    i,
+			Comparison: i,
+		}
+		comparison[i] = config.ComparisonConfig{
+			VoltThreshold: 250,
+			DebounceTime:  10,
+		}
+	}
+
 	config := swlsqds.Config{
 		Common: config.CommonConfig{
 			ADCResolution: 152,
 			DataSizeMs:    200,
 		},
-		Channels: map[int]config.ChannelConfig{
-			0: {
-				Gain:   1.0,
-				Offset: 0.0,
-				Window: 200,
-			},
-			1: {
-				Gain:   1.0,
-				Offset: 0.0,
-				Window: 200,
-			},
-			2: {
-				Gain:   1.0,
-				Offset: 0.0,
-				Window: 200,
-			},
-			3: {
-				Gain:   1.0,
-				Offset: 0.0,
-				Window: 200,
-			},
-		},
-		Comparison: map[int]config.ComparisonConfig{
-			0: {
-				VoltThreshold: 250,
-				DebounceTime:  10,
-			},
-			1: {
-				VoltThreshold: 250,
-				DebounceTime:  10,
-			},
-			2: {
-				VoltThreshold: 250,
-				DebounceTime:  10,
-			},
-			3: {
-				VoltThreshold: 250,
-				DebounceTime:  10,
-			},
-		},
-		OvervoltageChannels: []config.OvervoltageChannel{
-			{Channel: 0, Comparison: 0},
-			{Channel: 1, Comparison: 1},
-			{Channel: 2, Comparison: 2},
-			{Channel: 3, Comparison: 3},
-		},
+		Channels:            channels,
+		Comparison:          comparison,
+		OvervoltageChannels: overvoltage,
 	}
 
 	qds := swlsqds.New(options, config)
@@ -80,10 +60,8 @@ func TestMain(t *testing.T) {
 	ctx := context.Background()
 	go qds.Run(ctx)
 
-	fmt.Println(qds.GetGain(0))
-
 	for {
-		fmt.Println(qds.CurrentFrame)
+		fmt.Println(qds.GetDebounceTime(0))
 		time.Sleep(1 * time.Second)
 	}
 }
